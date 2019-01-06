@@ -36,9 +36,6 @@ int main(){
 	int l = cows[0];
 	sort(sep.begin(), sep.end());
 	for(int i = 0; i < sep.size(); i++){
-		cout << cows[sep[i] - 1] << endl;
-	}
-	for(int i = 0; i < sep.size(); i++){
 		ans += cows[sep[i] - 1] - l + 1;
 		l = cows[sep[i]];
 	}
