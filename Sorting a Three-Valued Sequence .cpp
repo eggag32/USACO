@@ -8,6 +8,8 @@ using namespace std;
 typedef long long ll;
 
 int main(){
+	//I coded this for the original IOI problem, which required to print the indexes of swapped elements
+	//I commented out the part which prints the indexes
 	freopen("sort3.in", "r", stdin);
 	freopen("sort3.out", "w", stdout);
 	int n;
