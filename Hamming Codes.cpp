@@ -15,8 +15,8 @@ typedef pair<int, int> pi;
 #define s second
 
 int hd(int a, int b){
-	int c = a ^ b;
-	return __builtin_popcount(c);
+	int c = a ^ b; //XOR
+	return __builtin_popcount(c); //easy way of counting the set bits
 }
 
 int main(){
