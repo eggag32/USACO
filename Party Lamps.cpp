@@ -101,9 +101,7 @@ int main(){
 		u = 4;	
 	}
 	fill(cnt.begin(), cnt.end(), 0);
-	for(int i = 1; i <= 4; i++){
-		dfs(i, 0);
-	}
+	dfs(1, 0);
 	for(int i = 0; i < pos.size(); i++){
 		string f;
 		for(int j = 0; j < l; j++){
