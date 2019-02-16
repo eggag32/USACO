@@ -20,10 +20,12 @@ int main(){
 	cout.tie(0);
 	freopen("subset.in", "r", stdin);
         freopen("subset.out", "w", stdout);
+	//This is a classic DP problem
 	ll n;
 	cin >> n;
 	ll ways[1000];
 	ways[0] = 1;
+	//If the sum of the sequence is odd, we can't split into 2 equal subsets
 	if(((n * (n + 1)) / 2) % 2 != 0){
 		cout << "0" << endl;
 		return 0;
