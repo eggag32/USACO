@@ -24,18 +24,10 @@ int h, w;
 void dfs(int x, int y, int cnt){
 	if(cost[x][y] > cnt) cost[x][y] = cnt;
 	else return;
-	if(x + 1 < 2 * h && g[x + 1][y] == ' '){
-		dfs(x + 2, y, cnt + 1);
-	}
-	if(x - 1 > 0 && g[x - 1][y] == ' '){
-		dfs(x - 2, y, cnt + 1);
-	}
-	if(y + 1 < 2 * w && g[x][y + 1] == ' '){
-		dfs(x, y + 2, cnt + 1);	
-	}
-	if(y - 1 > 0 && g[x][y - 1] == ' '){
-		dfs(x, y - 2, cnt + 1);
-	}
+	if(x + 1 < 2 * h && g[x + 1][y] == ' ') dfs(x + 2, y, cnt + 1);
+	if(x - 1 > 0 && g[x - 1][y] == ' ') dfs(x - 2, y, cnt + 1);
+	if(y + 1 < 2 * w && g[x][y + 1] == ' ') dfs(x, y + 2, cnt + 1);	
+	if(y - 1 > 0 && g[x][y - 1] == ' ') dfs(x, y - 2, cnt + 1);
 }
 
 int main(){
