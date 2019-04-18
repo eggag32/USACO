@@ -8,84 +8,78 @@ using namespace std;
 typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pi;
+#define debug(x) cout << #x << ": " << x << endl
+#define repn(i, a, b) for(int i = (a); i < (b); i++)
+#define rep(i, a) for(int i = 0; i < (a); i++)
+#define all(v) v.begin(), v.end() 
 #define mp make_pair
 #define pb push_back
-#define f first
-#define s second
+#define fi first
+#define se second
+#define endl '\n'
 
 int rn = 0;
+int g[55][55];
+int v[55][55];
+int b[55][55];
+int r[10000];
 
-int c[51][51];
-int v[51][51];
-int b[51][51];
-int room[3000];
-
-void dfs(int x, int y, int& z){
-	if(v[x][y]){
-		return;
-	}
-	v[x][y] = 1;
-	b[x][y] = rn;
-	z++;
-	if(!(c[x][y]&1)){
-		dfs(x, y - 1, z);
-	}
-	if(!(c[x][y]&2)){
-		dfs(x - 1, y, z);
-	}
-	if(!(c[x][y]&4)){
-		dfs(x, y + 1, z);
-	}
-	if(!(c[x][y]&8)){
-		dfs(x + 1, y, z);
-	}
+void dfs(int i, int j, int& c){
+	if(v[i][j]) return;
+	v[i][j] = 1;
+	b[i][j] = rn;
+	c++;
+	if(!(g[i][j]&1)) dfs(i, j - 1, c);
+	if(!(g[i][j]&2)) dfs(i - 1, j, c);
+	if(!(g[i][j]&4)) dfs(i, j + 1, c);
+	if(!(g[i][j]&8)) dfs(i + 1, j, c);
 }
 
 int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
 	freopen("castle.in", "r", stdin);
-        freopen("castle.out", "w", stdout);
-	int n, m;
-	cin >> n >> m;
-	for(int i = 1; i <= m; i++){
-		for(int j = 1; j <= n; j++){
-			cin >> c[i][j];
+	freopen("castle.out", "w", stdout);
+	int m, n;
+	cin >> m >> n;
+	repn(i, 1, n + 1){
+		repn(j, 1, m + 1){
+			cin >> g[i][j];
 		}
 	}
 	int mx = 0;
-	for(int i = 1; i <= m; i++){
-		for(int j = 1; j <= n; j++){
-			if(!v[i][j]){
-				rn++;
-				int crn = 0;
-				dfs(i, j, crn);
-				room[rn] = crn;
-				mx = max(crn, mx);
-			}
+	repn(i, 1, n + 1){
+		repn(j, 1 , m + 1) if(!v[i][j]){
+			int sz = 0;
+			rn++;
+			dfs(i, j, sz);
+			r[rn] = sz;
+			mx = max(mx, sz);
 		}
 	}
+	int ip;
+	int jp;
+	char letter;
 	int maxr = 0;
-	int bx;
-	int by;
-	char bd;
-	for(int j = 1; j <= m; j++){
+	repn(j, 1, m + 1){
 		for(int i = n; i >= 1; i--){
-			if(c[i][j]&2){
-				if(b[i - 1][j] && b[i - 1][j] != b[i][j]){
-					if((room[b[i][j]] + room[b[i - 1][j]]) > maxr){
-						maxr = room[b[i - 1][j]] + room[b[i][j]];
-						bd = 'N';
-						bx = j;
-						by = i;
+			if(g[i][j]&2){
+				if(b[i - 1][j] && b[i][j] != b[i - 1][j]){
+					if((r[b[i][j]] + r[b[i - 1][j]]) > maxr){
+						maxr = r[b[i][j]] + r[b[i - 1][j]]; 
+						ip = i;
+						jp = j;
+						letter = 'N';
 					}
 				}
 			}
-			if(c[i][j]&4){
-				if(b[i][j + 1] && b[i][j + 1] != b[i][j]){
-					if((room[b[i][j]] + room[b[i][j + 1]]) > maxr){
-						maxr = room[b[i][j]] + room[b[i][j + 1]];
-						bd = 'E';
-						bx = j;
-						by = i;
+			if(g[i][j]&4){
+				if(b[i][j + 1] && b[i][j] != b[i][j + 1]){
+					if((r[b[i][j]] + r[b[i][j + 1]]) > maxr){
+						maxr = r[b[i][j]] + r[b[i][j + 1]]; 
+						ip = i;
+						jp = j;
+						letter = 'E';
 					}
 				}
 			}
@@ -94,6 +88,13 @@ int main(){
 	cout << rn << endl;
 	cout << mx << endl;
 	cout << maxr << endl;
-	cout << by << " " << bx << " " << bd << endl;
-	return 0;	
+	cout << ip << " " << jp << " " << letter << endl;
+	return 0;
 }
+/*
+Things to look out for:
+	- Integer overflows
+	- Array bounds
+	- Special cases
+Be careful!
+*/
