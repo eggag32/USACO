@@ -3,4 +3,6 @@ I will be posting my solutions to problems from USACO Training Pages here. Feel 
 
 Chapter 1: Done.
 
-Chapter 2: In progress.
+Chapter 2: Done.
+
+Chapter 3: In progress.
